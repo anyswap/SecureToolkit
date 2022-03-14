@@ -74,7 +74,18 @@ function verifySignedData(fromPkHexStr, signedData) {
 
     let result = verify.verify( { key: pkPem, dsaEncoding: 'ieee-p1363'}, sigByteArr)
 
-    return result
+    if (result){
+        return {
+            Data: signedData.Data,
+            Result: true
+        }
+    }
+    else {
+        return {
+            Data: null,
+            Result: false
+        }
+    }
 }
 
 function calEncSignedData(selfSkHexStr, toPkHexStr, data) {
@@ -152,8 +163,13 @@ function verifyEncSignedData(selfSkHexStr, fromPkHexStr, encSignedData) {
         Hash: encSignedData.Hash,
         Sig: encSignedData.Sig
     }
+    
+	let result = verifySignedData(fromPkHexStr, signedData)
 
-	return verifySignedData(fromPkHexStr, signedData)
+    return {
+        Data: result.Data,
+        Result: result.Result
+    }
 }
 
 function recoverPemPrivateKey(skHexStr) {
