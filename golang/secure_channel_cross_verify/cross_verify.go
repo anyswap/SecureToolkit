@@ -94,13 +94,14 @@ func verifyNodejsOutput(prefix string) {
 			Sig: sig,
 		}
 
-		data, err := sc.VerifyEncSignedData(bPrivateKey, aPublicKey, encSignedData)
+		_, err := sc.VerifyEncSignedData(bPrivateKey, aPublicKey, encSignedData)
 
 		fmt.Println("------")
-		fmt.Println(data)
 
 		if err != nil {
 			fmt.Println("failed to verify!")
+		} else {
+			fmt.Println("success to verify")
 		}
 	}
 }
@@ -112,7 +113,7 @@ func main() {
 	outputForNodejs(prefixOutput)
 
 
-	prefixNodejsOutput := "../../nodejs/03.14_"
+	prefixNodejsOutput := "../../nodejs/secure_channel_cross_verify/03.14_"
 
 	verifyNodejsOutput(prefixNodejsOutput)
 }

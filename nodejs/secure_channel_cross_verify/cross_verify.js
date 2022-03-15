@@ -1,4 +1,4 @@
-const sc = require('./secure_channel')
+const sc = require('../secure_channel')
 const fs = require('fs')
 
 
@@ -71,7 +71,7 @@ function verifyNodejsOutput(prefix) {
         let result = sc.verifyEncSignedData(bPrivateKey, aPublicKey, encSignedData)
         
         console.log("------")
-		console.log(result.Data)
+		console.log(result.Result)
 		if (!result.Result) {
 			console.log("failed to verify!")
 		}
@@ -87,13 +87,11 @@ let benchCount = 10
 
 
 
-
-
 let prefixOutput = "03.14_"
 	
 outputForNodejs(prefixOutput)
 
-let prefixNodejsOutput = "../golang/secure_channel_cross_verify/03.14_"
+let prefixNodejsOutput = "../../golang/secure_channel_cross_verify/03.14_"
 
 verifyNodejsOutput(prefixNodejsOutput)
 
